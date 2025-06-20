@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = "yourdockerhubusername/mini-social-media"
+        IMAGE_NAME = "hayk7js7/mini-social-media"
         IMAGE_TAG = "latest"
     }
 
