@@ -1,9 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:18' // or 'node:20' – any official Node.js image
-        }
-    }
+    agent any
 
     environment {
         IMAGE_NAME = "hayk7js7/mini-social-media"
