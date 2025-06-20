@@ -1,7 +1,18 @@
 pipeline {
     agent any
 
+    environment {
+        IMAGE_NAME = "yourdockerhubusername/mini-social-media"
+        IMAGE_TAG = "latest"
+    }
+
     stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/Hayk7JS7/Mini-social-Media_4.git'
+            }
+        }
+
         stage('Install Backend') {
             steps {
                 dir('server') {
@@ -29,6 +40,23 @@ pipeline {
         stage('Test') {
             steps {
                 echo '🧪 You can add actual tests here if available'
+            }
+        }
+
+        stage('Docker Build') {
+            steps {
+                sh 'docker build -t $IMAGE_NAME:$IMAGE_TAG .'
+            }
+        }
+
+        stage('Docker Push') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                    sh '''
+                        echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+                        docker push $IMAGE_NAME:$IMAGE_TAG
+                    '''
+                }
             }
         }
     }
