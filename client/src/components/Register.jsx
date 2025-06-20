@@ -5,7 +5,7 @@ import { userRegistrationAuth } from '../features/userAuthSlice'
 
 
 const Register = () => {
-    const { isRegistred, isRegisteredError, isRegistredLoading } = useSelector(state => state.userAuth) 
+    // const { isRegistred, isRegisteredError, isRegistredLoading } = useSelector(state => state.userAuth) 
 
     const dispatch = useDispatch()
     const [userInfo, setUserInfo] = useState({
