@@ -9,8 +9,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main',
-                git 'https://github.com/Hayk7JS7/Mini-social-Media_4.git'
+                git url: 'https://github.com/Hayk7JS7/Mini-social-Media_4.git', branch: 'main'
             }
         }
 
