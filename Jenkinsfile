@@ -1,6 +1,8 @@
 pipeline {
     agent any
-
+    steps {
+        git 'https://github.com/Hayk7JS7/Mini-social-Media_4.git'
+    }
     environment {
         IMAGE_NAME = "hayk7js7/mini-social-media"
         IMAGE_TAG = "latest"
