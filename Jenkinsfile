@@ -1,5 +1,10 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'docker:24.0.7-cli' // Use a Docker CLI image with shell, not `docker:latest`
+            args '-v /var/run/docker.sock:/var/run/docker.sock'
+        }
+    }
 
     environment {
         IMAGE_NAME = "hayk7js7/mini-social-media"
@@ -7,10 +12,16 @@ pipeline {
     }
 
     stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/Hayk7JS7/Mini-social-Media_4.git'
+            }
+        }
+
         stage('Install Backend') {
             steps {
                 dir('server') {
-                    sh 'npm install'
+                    sh 'apk add --no-cache nodejs npm && npm install'
                 }
             }
         }
@@ -18,7 +29,7 @@ pipeline {
         stage('Install Frontend') {
             steps {
                 dir('client') {
-                    sh 'npm install'
+                    sh 'apk add --no-cache nodejs npm && npm install'
                 }
             }
         }
@@ -33,7 +44,7 @@ pipeline {
 
         stage('Test') {
             steps {
-                echo '🧪 You can add actual tests here if available'
+                echo '🧪 Add real tests here if needed'
             }
         }
 
