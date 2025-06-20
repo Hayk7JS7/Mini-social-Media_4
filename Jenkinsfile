@@ -7,12 +7,6 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                git url: 'https://github.com/Hayk7JS7/Mini-social-Media_4.git', branch: 'main'
-            }
-        }
-
         stage('Install Backend') {
             steps {
                 dir('server') {
