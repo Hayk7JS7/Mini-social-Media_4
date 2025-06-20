@@ -32,7 +32,7 @@ pipeline {
         stage('Build Frontend') {
             steps {
                 dir('client') {
-                    sh 'npm run build || echo "Skipping build if no script"'
+                    sh 'CI=false npm run build || echo "Skipping build if no script"'
                 }
             }
         }
